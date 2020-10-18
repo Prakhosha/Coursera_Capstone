@@ -1,0 +1,27 @@
+Introduction/Business understanding:
+Insurance companies from Seattle often have difficulties determining their term and condition when it comes to a car accident. For example, some location is considered more dangerous to another location so it would be reasonable to optimize the insurance based on the location of the accident. Or whether the accident is happening on a road with many passengers or not. To do that, insurance companies need a good model to determine the severity of certain car accident. The goal of this project is to create a classifier to determine the class of a car accident so that
+the company can create a better term for everyone. The target audience for this problem is insurance companies that want to create an optimized term and condition for a car accident.
+
+The data for this problem is acquired from Seattle Geo Data: https://data-seattlecitygis.opendata.arcgis.com/datasets/5b5c745e0f1f48e7a53acec63a0022ab_0. The attributes of the data can be understood from https://www.seattle.gov/Documents/Departments/SDOT/GIS/Collisions_OD.pdf. For this particular problem, we only need 13 attributes which are:
+
+1. X : X coordinate
+2. Y : Y coordinate
+3. ADDRTYPE : Collision address type: Alley, Block, Intersection.
+4. PERSONCOUNT : The total number of people involved in the collision.
+5. PEDCOUNT : The number of pedestrians involved in the collision.
+6. PEDCYLCOUNT : The number of bicycles involved in the collision.
+7. VEHCOUNT : The number of vehicles involved in the collision. 
+8. INJURIES : The number of total injuries in the collision.
+9. SERIOUSINJURIES : The number of serious injuries in the collision.
+10. FATALITIES : The number of fatalities in the collision.
+11. JUNCTIONTYPE : Category of junction at which collision took place.
+12. INATTENTIONIND : Whether or not collision was due to inattention.
+13. UNDERINFL : Whether or not a driver involved was under the influence of drugs or alcohol.
+
+The target for this problem is SEVERITYCODE that contain values from 0-3:
+
+1. 0 = Unknown
+2. 1, = Prop damage
+3. 2 = Injury
+4. 2b = Serious injury
+5. 3 = Fatality
