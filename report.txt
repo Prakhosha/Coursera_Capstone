@@ -1,0 +1,56 @@
+Introduction/Business understanding:
+Insurance companies from Seattle often have difficulties determining their term and condition when it comes to a car accident. For example, some location is considered more dangerous to another location so it would be reasonable to optimize the insurance based on the location of the accident. Or whether the accident is happening on a road with many passengers or not. To do that, insurance companies need a good model to determine the severity of certain car accident. The goal of this project is to create a classifier to determine the class of a car accident so that
+the company can create a better term for everyone. The target audience for this problem is insurance companies that want to create an optimized term and condition for a car accident.
+
+Data:
+The data for this problem is acquired from Seattle Geo Data: https://data-seattlecitygis.opendata.arcgis.com/datasets/5b5c745e0f1f48e7a53acec63a0022ab_0. The attributes of the data can be understood from https://www.seattle.gov/Documents/Departments/SDOT/GIS/Collisions_OD.pdf. For this particular problem, we only need 13 attributes which are:
+
+1. X : X coordinate
+2. Y : Y coordinate
+3. ADDRTYPE : Collision address type: Alley, Block, Intersection.
+4. PERSONCOUNT : The total number of people involved in the collision.
+5. PEDCOUNT : The number of pedestrians involved in the collision.
+6. PEDCYLCOUNT : The number of bicycles involved in the collision.
+7. VEHCOUNT : The number of vehicles involved in the collision. 
+8. INJURIES : The number of total injuries in the collision.
+9. SERIOUSINJURIES : The number of serious injuries in the collision.
+10. FATALITIES : The number of fatalities in the collision.
+11. JUNCTIONTYPE : Category of junction at which collision took place.
+12. INATTENTIONIND : Whether or not collision was due to inattention.
+13. UNDERINFL : Whether or not a driver involved was under the influence of drugs or alcohol.
+
+The target for this problem is SEVERITYCODE that contain values from 0-3:
+
+1. 0 = Unknown
+2. 1, = Prop damage
+3. 2 = Injury
+4. 2b = Serious injury
+5. 3 = Fatality
+
+Methodology:
+The first thing we should do is change certain value in the data into some integer. The ‘NaN’ and ‘Y’ value in INATTENTIONIND to 0 and 1. This should make our training easier. We should also change ‘N’ and ‘Y’ value in ‘UNDERINFL’ to 0 and 1.
+
+The next thing we do is remove any missing value from our data. I exclude any data which has ‘Unknown’ in severity or junction type because we do not have much to do about it. I also exclude any NaN values.
+
+The next thing I do is encoding the data. The ‘ADDRTYPE’, ‘JUNCTIONTYPE’ attributes and the target is not an integer. For example, ‘ADDRTYPE’ contains value such intersection, alley, or block. Encoding should convert these values into a list of integer so that it can be trained easily.
+
+Next, the accident’s coordinate is still not normalized. This will introduce a bias to the model. So I need to scale the coordinate using min-max scaler.
+
+To validate and test the model that I am going to use, I need a set of unseen data. So I split the data into training and test data. Training data contain 70% of the original data and test data contain 33% of the original data.
+
+I use decision tree model because decision tree has been known to perform well on complex data and also on a problem in which have so many samples.
+
+To evaluate the model I use different kind of metrics: accuracy, precision, recall, and F1 score.
+
+Results:
+The model performs 100% accuracy on the training data and 99.99% on the test data. It also performs 79.99% on precision, 80% on recall, and 79.99% on F1 score. This indicate that the model has perform well on the problem.
+
+Discussion:
+Based on the result we can see that our model can successfully predict the severity of an accident. Nevertheless, we can still make an improvement to the model. Several improvements on the problem that can be made are:
+1.	Adding more attributes. Instead of only including 13 of the attributes we can adding more features to the model so the model can predict more complex situation.
+2.	Using deep learning model. Deep learning model has been known to perform better than others machine learning model. So instead of using decision tree model, using deep learning model can improve the performance of our case.
+3.	Random forest. We can also ensemble the decision tree with another decision tree to perform ensemble machine learning. This will increase the performance of the model to many unseen data.
+4.	Based on the result, insurance companies can predict any accident with an accuracy of 99.99% being the right category rather than manual assign it.
+
+Conclusion:
+Car accident severity prediction had been perform on 13 attributes with performances of 99.99% accuracy being the right category. 
